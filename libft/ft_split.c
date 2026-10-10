@@ -28,17 +28,22 @@ static int	count_words(char const *s, char c)
 	return (counter);
 }
 
-char	**ft_split(char const *s, char c)
+static char	**free_all(char **boxes, size_t n)
 {
-	char	**boxes;
+	while (n > 0)
+	{
+		n--;
+		free(boxes[n]);
+	}
+	free(boxes);
+	return (NULL);
+}
+
+static char	**fill_boxes(char **boxes, char const *s, char c)
+{
 	size_t	j;
 	size_t	len;
 
-	if (s == NULL)
-		return (NULL);
-	boxes = (char **) malloc((sizeof(char *) * (count_words(s, c) + 1)));
-	if (!boxes)
-		return (NULL);
 	j = 0;
 	while (*s != '\0')
 	{
@@ -47,7 +52,10 @@ char	**ft_split(char const *s, char c)
 			len = 0;
 			while (s[len] != '\0' && s[len] != c)
 				len++;
-			boxes[j++] = ft_substr(s, 0, len);
+			boxes[j] = ft_substr(s, 0, len);
+			if (boxes[j] == NULL)
+				return (free_all(boxes, j));
+			j++;
 			s += len;
 		}
 		else
@@ -55,4 +63,16 @@ char	**ft_split(char const *s, char c)
 	}
 	boxes[j] = NULL;
 	return (boxes);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**boxes;
+
+	if (s == NULL)
+		return (NULL);
+	boxes = (char **) malloc((sizeof(char *) * (count_words(s, c) + 1)));
+	if (!boxes)
+		return (NULL);
+	return (fill_boxes(boxes, s, c));
 }
