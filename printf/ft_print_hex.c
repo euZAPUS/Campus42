@@ -9,6 +9,7 @@
 /*   Updated: 2026/10/10 17:30:00 by alsanch3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_printf.h"
 
 void	ft_puthex(unsigned long n, char *base)
