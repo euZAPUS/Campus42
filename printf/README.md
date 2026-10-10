@@ -98,6 +98,10 @@ function works for `%x`, `%X` and `%p`. Numbers are handled as `long` or
 `unsigned long`, so `INT_MIN` can be made positive without overflowing and
 pointers fit in full.
 
+**Own helpers.** The project does not use libft. The only helper it needed from it,
+`strlen`, is reimplemented as `ft_pf_strlen`, with a different name so the library
+can be linked together with libft in future projects without duplicate symbols.
+
 **Counting.** The number of characters printed is computed by counting how many times
 the number can be divided by its base (plus one for the `-` sign of negative numbers).
 
@@ -109,7 +113,7 @@ No dynamic memory is used, so there is nothing to free and no possible leaks.
 |------|----------|
 | `ft_printf.h` | includes and prototypes |
 | `ft_printf.c` | `ft_printf` (main loop) and `ft_conversion` (dispatcher) |
-| `ft_print_chars.c` | `%c`, `%s` and a local `ft_strlen` |
+| `ft_print_chars.c` | `%c`, `%s` and a local `ft_pf_strlen` |
 | `ft_print_nbrs.c` | `%d`, `%i` and `%u` |
 | `ft_print_hex.c` | `%x`, `%X` and `%p` |
 

@@ -21,7 +21,7 @@ int		ft_conversion(char letra, va_list *args);
 
 int		ft_print_char(int c);
 int		ft_print_str(char *s);
-size_t	ft_strlen(const char *s);
+size_t	ft_pf_strlen(const char *s);
 
 int		ft_print_nbr(long n);
 void	ft_putnbr_long(long n);

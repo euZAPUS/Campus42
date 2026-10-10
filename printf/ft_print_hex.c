@@ -45,15 +45,14 @@ int	ft_print_hex(unsigned long n, char *base)
 
 int	ft_print_ptr(void *ptr)
 {
-	long int	counter;
+	int	counter;
 
-	counter = 0;
 	if (ptr == NULL)
 	{
 		write(1, "(nil)", 5);
 		return (5);
 	}
 	write(1, "0x", 2);
-	counter = ft_print_hex((unsigned long) ptr, "0123456789abcdef");
+	counter = ft_print_hex((unsigned long)ptr, "0123456789abcdef");
 	return (2 + counter);
 }
