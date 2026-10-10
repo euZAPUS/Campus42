@@ -27,4 +27,8 @@ int		ft_print_nbr(long n);
 void	ft_putnbr_long(long n);
 int		ft_numlen(long n);
 
+void	ft_puthex(unsigned long n, char *base);
+int		ft_hexlen(unsigned long n);
+int		ft_print_hex(unsigned long n, char *base);
+
 #endif
