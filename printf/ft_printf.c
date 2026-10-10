@@ -26,6 +26,8 @@ int	ft_conversion(char letra, va_list *args)
 		return (ft_print_hex(va_arg(*args, unsigned int), "0123456789abcdef"));
 	if (letra == 'X')
 		return (ft_print_hex(va_arg(*args, unsigned int), "0123456789ABCDEF"));
+	if (letra == 'p')
+		return (ft_print_ptr(va_arg(*args, void *)));
 	if (letra == '%')
 		return (ft_print_char('%'));
 	return (0);

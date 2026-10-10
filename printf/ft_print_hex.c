@@ -9,7 +9,6 @@
 /*   Updated: 2026/10/10 17:30:00 by alsanch3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "ft_printf.h"
 
 void	ft_puthex(unsigned long n, char *base)
@@ -41,4 +40,19 @@ int	ft_print_hex(unsigned long n, char *base)
 {
 	ft_puthex(n, base);
 	return (ft_hexlen(n));
+}
+
+int	ft_print_ptr(void *ptr)
+{
+	long int	counter;
+
+	counter = 0;
+	if (ptr == NULL)
+	{
+		write(1, "(nil)", 5);
+		return (5);
+	}
+	write(1, "0x", 2);
+	counter = ft_print_hex((unsigned long) ptr, "0123456789abcdef");
+	return (2 + counter);
 }
