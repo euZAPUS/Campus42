@@ -12,36 +12,43 @@
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+static char	*ft_fill_stash(int fd, char *stash)
 {
-	static char	*stash;
-	char		*line;
 	char		*buf;
 	char		*temp;
 	ssize_t		n;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
 	buf = malloc(BUFFER_SIZE + 1);
 	if (buf == NULL)
+	{
+		free(stash);
 		return (NULL);
+	}
 	n = read(fd, buf, BUFFER_SIZE);
 	if (n < 0)
 	{
 		free(buf);
+		free(stash);
 		return (NULL);
 	}
-	else
-		buf[n] = '\0';
+	buf[n] = '\0';
 	temp = stash;
 	stash = ft_strjoin(temp, buf);
 	free(temp);
-	if (stash == NULL)
-	{
-		free(buf);
-		return (NULL);
-	}
-	line = NULL;
 	free(buf);
+	return (stash);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*stash;
+	char		*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	stash = ft_fill_stash(fd, stash);
+	if (stash == NULL)
+		return (NULL);
+	line = NULL;
 	return (line);
 }
