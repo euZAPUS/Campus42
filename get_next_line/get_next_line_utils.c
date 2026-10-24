@@ -69,3 +69,20 @@ char	*ft_strjoin(char *s1, char *s2)
 	l[i] = '\0';
 	return (l);
 }
+
+char	*ft_append(char *stash, char *buf)
+{
+	char	*temp;
+
+	temp = stash;
+	stash = ft_strjoin(temp, buf);
+	free(temp);
+	return (stash);
+}
+
+char	*ft_clean(char *buf, char *stash)
+{
+	free(buf);
+	free(stash);
+	return (NULL);
+}

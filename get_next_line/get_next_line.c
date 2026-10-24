@@ -15,26 +15,22 @@
 static char	*ft_fill_stash(int fd, char *stash)
 {
 	char		*buf;
-	char		*temp;
 	ssize_t		n;
 
 	buf = malloc(BUFFER_SIZE + 1);
 	if (buf == NULL)
+		return (ft_clean(NULL, stash));
+	n = 1;
+	while (n > 0 && ft_strchr(stash, '\n') == NULL)
 	{
-		free(stash);
-		return (NULL);
+		n = read(fd, buf, BUFFER_SIZE);
+		if (n < 0)
+			return (ft_clean(buf, stash));
+		buf[n] = '\0';
+		stash = ft_append(stash, buf);
+		if (stash == NULL)
+			return (ft_clean(buf, NULL));
 	}
-	n = read(fd, buf, BUFFER_SIZE);
-	if (n < 0)
-	{
-		free(buf);
-		free(stash);
-		return (NULL);
-	}
-	buf[n] = '\0';
-	temp = stash;
-	stash = ft_strjoin(temp, buf);
-	free(temp);
 	free(buf);
 	return (stash);
 }
