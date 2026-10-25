@@ -6,7 +6,7 @@
 /*   By: alsanch3 <alsanch3@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 14:45:31 by alsanch3          #+#    #+#             */
-/*   Updated: 2026/10/24 14:06:17 by alsanch3         ###   ########.fr       */
+/*   Updated: 2026/10/24 15:13:52 by alsanch3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char	*ft_fill_stash(int fd, char *stash)
 {
-	char		*buf;
-	ssize_t		n;
+	char	*buf;
+	ssize_t	n;
 
 	buf = malloc(BUFFER_SIZE + 1);
 	if (buf == NULL)
@@ -33,6 +33,34 @@ static char	*ft_fill_stash(int fd, char *stash)
 	}
 	free(buf);
 	return (stash);
+}
+
+static char	*ft_get_line(char *stash)
+{
+	int		i;
+	int		j;
+	char	*string;
+
+	j = 0;
+	i = 0;
+	if (stash == NULL || stash[0] == '\0')
+		return (NULL);
+	while (stash[i] != '\n' && stash[i] != '\0')
+	{
+		i++;
+	}
+	if (stash[i] == '\n')
+		i++;
+	string = malloc(i + 1);
+	if (string == NULL)
+		return (NULL);
+	while (j < i)
+	{
+		string[j] = stash[j];
+		j++;
+	}
+	string[j] = '\0';
+	return (string);
 }
 
 char	*get_next_line(int fd)
