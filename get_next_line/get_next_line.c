@@ -6,7 +6,7 @@
 /*   By: alsanch3 <alsanch3@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 14:45:31 by alsanch3          #+#    #+#             */
-/*   Updated: 2026/10/24 15:13:52 by alsanch3         ###   ########.fr       */
+/*   Updated: 2026/10/25 12:42:28 by alsanch3         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,35 @@ static char	*ft_fill_stash(int fd, char *stash)
 	}
 	free(buf);
 	return (stash);
+}
+
+static char	*ft_new_stash(char *stash)
+{
+	int		j;
+	int		i;
+	char	*newstash;
+
+	i = 0;
+	j = 0;
+	while (stash[i] != '\n' && stash[i] != '\0')
+		i++;
+	if (stash[i] != '\n')
+	{
+		return (ft_clean(NULL, stash));
+	}
+	i++;
+	newstash = malloc(ft_strlen(stash) - i + 1);
+	if (newstash == NULL)
+		return (ft_clean(NULL, stash));
+	while (stash[i] != '\0')
+	{
+		newstash[j] = stash[i];
+		j++;
+		i++;
+	}
+	newstash[j] = '\0';
+	free(stash);
+	return (newstash);
 }
 
 static char	*ft_get_line(char *stash)
@@ -73,6 +102,7 @@ char	*get_next_line(int fd)
 	stash = ft_fill_stash(fd, stash);
 	if (stash == NULL)
 		return (NULL);
-	line = NULL;
+	line = ft_get_line(stash);
+	stash = ft_new_stash(stash);
 	return (line);
 }
