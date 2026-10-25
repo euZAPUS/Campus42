@@ -16,12 +16,13 @@
 | :-- | :-- |
 | [`libft`](libft/) | Mi biblioteca de C: reimplementación de funciones de la libc y utilidades de cadenas, memoria, ficheros y listas enlazadas. |
 | [`printf`](printf/) | `ft_printf`: reimplementación de `printf()` con funciones variádicas. |
+| [`get_next_line`](get_next_line/) | `get_next_line`: función que lee un descriptor de archivo línea a línea, con variables estáticas. |
 
 Cada carpeta tiene su propio `README` y su `Makefile`. Para compilar uno:
 
 ```bash
 git clone https://github.com/euZAPUS/Campus42.git
-cd Campus42/libft   # o printf
+cd Campus42/libft   # o printf (get_next_line no tiene Makefile)
 make
 ```
 
